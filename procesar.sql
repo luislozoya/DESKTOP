@@ -6,6 +6,7 @@ PROCEDURE procesar IS
 	vSumCorteCaja			NUMBER := 0;
 	vAlgo 				NUMBER;
 			vPrueba					VARCHAR2(10);
+			vAlgo2				        VARCHAR2(10);
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
