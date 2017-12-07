@@ -2,8 +2,10 @@ PROCEDURE procesar IS
 
   vEmpresa              empresas.nombre%TYPE;
 	vSuc                  sucursales.succonnum%TYPE;
-	vDiferencia           NUMBER;
-	vSumCorteCaja					NUMBER := 0;
+			
+			
+			vDiferencia           NUMBER;
+						vSumCorteCaja					NUMBER := 0;
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
