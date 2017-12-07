@@ -6,6 +6,7 @@ PROCEDURE procesar IS
 			
 			vDiferencia           NUMBER;
 						vSumCorteCaja					NUMBER := 0;
+						vAlgo NUMBER;
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
