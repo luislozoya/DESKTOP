@@ -5,9 +5,8 @@ PROCEDURE procesar IS
   vDiferencia           NUMBER;
   vSumCorteCaja			NUMBER := 0;
   vAlgo 				NUMBER;
-	
-  
-			vHelp					VARCHAR2(10);
+												
+												vHelp					VARCHAR2(10);
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
