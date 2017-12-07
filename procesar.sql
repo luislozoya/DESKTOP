@@ -1,12 +1,10 @@
 PROCEDURE procesar IS
 
   vEmpresa              empresas.nombre%TYPE;
-	vSuc                  sucursales.succonnum%TYPE;
-			
-			
-			vDiferencia           NUMBER;
-						vSumCorteCaja					NUMBER := 0;
-						vAlgo NUMBER;
+  vSuc                  sucursales.succonnum%TYPE;
+  vDiferencia           NUMBER;
+  vSumCorteCaja			NUMBER := 0;
+  vAlgo 				NUMBER;
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
@@ -324,7 +322,7 @@ BEGIN
 		
 	END IF;
 	
-	IF NOT(LGNError.confirmacion('¿Está seguro de generar la póliza?')) THEN
+	IF NOT(LGNError.confirmacion('Â¿EstÃ¡ seguro de generar la pÃ³liza?')) THEN
 		LGNValid.execRollback;
 		RAISE form_trigger_failure;
 	END IF;
@@ -333,7 +331,7 @@ BEGIN
   vPeriodoFCC   := to_number(to_char(:parameter.fechacortecaja,'MM'));
   vFCC          := to_char(:parameter.fechacortecaja, 'DD/MM/YYYY');
 	
-	--32739 los valores se toman tal cual sin hacer multiplicación por tipo de cambio
+	--32739 los valores se toman tal cual sin hacer multiplicaciÃ³n por tipo de cambio
 	/*go_block('CORTECAJA_LST');
 	first_record;
 	LOOP
@@ -357,7 +355,7 @@ BEGIN
                            ,vEjercicioFCC
                            ,vPeriodoFCC) = 1) THEN
       LGNValid.execRollback;
-      LGNError.Mensaje('El mes utilizado ya está cerrado en contabilidad');
+      LGNError.Mensaje('El mes utilizado ya estÃ¡ cerrado en contabilidad');
       RAISE form_trigger_failure;
 	  END IF;
 	  
@@ -365,7 +363,7 @@ BEGIN
    		
    		IF :parameter.PorcComisionTj <= 0 OR :parameter.PorcComisionTj IS NULL THEN	
      	  -- 
-     	  -- BANDERA QUE INDICA QUE LA EMPRESA NO APLICA IVA SOBRE COMISIONES BANCARIAS (PANAMÁ, PETICIÓN DE GABRIEL ORTIZ)
+     	  -- BANDERA QUE INDICA QUE LA EMPRESA NO APLICA IVA SOBRE COMISIONES BANCARIAS (PANAMÃ, PETICIÃ“N DE GABRIEL ORTIZ)
      	  -- REQ. 4108
      	  -- 
      	  vIvaComision := 0 ;
@@ -373,7 +371,7 @@ BEGIN
       	IF :parameter.esquemapolcortecaja = 1 THEN  				
    			  
    			  LGNValid.execRollback;
-     	    LGNError.mensaje('Falta configurar el porcentaje de IVA para calcular la comisión de pagos con tarjeta de bancos con comisión especial');
+     	    LGNError.mensaje('Falta configurar el porcentaje de IVA para calcular la comisiÃ³n de pagos con tarjeta de bancos con comisiÃ³n especial');
      	    RAISE form_trigger_failure;
    			 
    			END IF;
@@ -391,7 +389,7 @@ BEGIN
   END LOOP;
   
   -- 
-  -- OBTENEMOS LA AFILIACIÓN BANCARIA DE LA SUCURSAL
+  -- OBTENEMOS LA AFILIACIÃ“N BANCARIA DE LA SUCURSAL
   -- 
   OPEN  curAfiliacionSucursal(:parameter.empresa, :dummy.sucursal);
   FETCH curAfiliacionSucursal INTO vAfiliacionSucursal;
@@ -471,7 +469,7 @@ BEGIN
    	                         :poliza_lst.observaciones;
            
            -- 
-     	     -- GENERACIÓN DEL MOVIMIENTO BANCARIO POR EL IMPORTE DE LA COMISIÓN
+     	     -- GENERACIÃ“N DEL MOVIMIENTO BANCARIO POR EL IMPORTE DE LA COMISIÃ“N
      	     -- 
      	     bdCreaBanMovs(:parameter.empresa                          -- EMPRESA
                         ,:poliza_lst.ctabanclave                     -- CUENTA BANCARIA
@@ -493,12 +491,12 @@ BEGIN
                         ,vConsecutivo
                         ,null                                 );
            --
-           -- GENERACIÓN DEL MOVIMIENTO BANCARIO POR EL IVA DE LA COMISIÓN
+           -- GENERACIÃ“N DEL MOVIMIENTO BANCARIO POR EL IVA DE LA COMISIÃ“N
            --
            IF vIvaComision = 1 THEN
              
              --
-             --SOLO SI ESTÁ CONFIGURADO EL % DE IVA SOBRE COMISIONES SE GENERAN LOS CARGOS BANCARIOS CORRESPONDIENTES
+             --SOLO SI ESTÃ CONFIGURADO EL % DE IVA SOBRE COMISIONES SE GENERAN LOS CARGOS BANCARIOS CORRESPONDIENTES
              --
             
              vTarjeta := 'I' || :poliza_lst.tipopago ||'-'|| :poliza_lst.porcentajecomision;
@@ -974,7 +972,7 @@ BEGIN
 	    END IF;
 			
 			--
-			-- GENERACIÓN DEL MOVIMIENTO BANCARIO POR EL IMPORTE DE LA COMISIÓN
+			-- GENERACIÃ“N DEL MOVIMIENTO BANCARIO POR EL IMPORTE DE LA COMISIÃ“N
 			--
 			bdCreaBanMovs(:parameter.empresa                       -- EMPRESA
 			          ,rComisionesProm.ctabanclave                 -- CUENTA BANCARIA
@@ -996,13 +994,13 @@ BEGIN
 			          ,vConsecutivo
 			          ,null                                 );
 			--
-			-- GENERACIÓN DEL MOVIMIENTO BANCARIO POR EL IVA DE LA COMISIÓN
+			-- GENERACIÃ“N DEL MOVIMIENTO BANCARIO POR EL IVA DE LA COMISIÃ“N
 			--
 			
 			IF vIvaComision = 1 THEN 
 			
 			--
-			--SOLO SI ESTÁ CONFIGURADO EL % DE IVA SOBRE COMISIONES SE GENERAN LOS CARGOS BANCARIOS CORRESPONDIENTES
+			--SOLO SI ESTÃ CONFIGURADO EL % DE IVA SOBRE COMISIONES SE GENERAN LOS CARGOS BANCARIOS CORRESPONDIENTES
 			--
 			              
 				vTarjeta := 'I' || rComisionesProm.tipopago ||'-'|| rComisionesProm.PorcComiPromoc;
@@ -1043,7 +1041,7 @@ BEGIN
     
     
     -- 
-    -- SE REVISA QUE SEA UN ARCHIVO VÁLIDO
+    -- SE REVISA QUE SEA UN ARCHIVO VÃLIDO
     -- 
 		FOR InfoPol IN curInfoPoliza (NVL (vEjercicioFCC , vEjercicio )
 		                             ,NVL (vPeriodoFCC   , vPeriodo   )
@@ -1122,7 +1120,7 @@ BEGIN
 		activaItem('FILTRO.LIMPIA', 				property_false,  property_false,  property_false);
 		activaItem('FILTRO.PROCESAR', 			property_false,  property_false,  property_false);
 		  	
-		LGNError.mensaje('Este Corte de Caja generó la Póliza: ' || vNumPoliza, 'ALERT_CAUTION1');
+		LGNError.mensaje('Este Corte de Caja generÃ³ la PÃ³liza: ' || vNumPoliza, 'ALERT_CAUTION1');
 		
 		go_block('CORTECAJA_LST');
 		clear_block(no_validate);
