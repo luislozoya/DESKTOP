@@ -1,13 +1,11 @@
 PROCEDURE procesar IS
 
-  vEmpresa              empresas.nombre%TYPE;
-  vSuc                  sucursales.succonnum%TYPE;
-  vDiferencia           NUMBER;
-  vSumCorteCaja			NUMBER := 0;
-  vAlgo 				NUMBER;
-	
-  
-			vHelp					VARCHAR2(10);
+	vEmpresa              empresas.nombre%TYPE;
+	vSuc                  sucursales.succonnum%TYPE;
+	vDiferencia           NUMBER;
+	vSumCorteCaja			NUMBER := 0;
+	vAlgo 				NUMBER;
+			vPrueba					VARCHAR2(10);
 	
 	vImpTotal	 						NUMBER DEFAULT 0;
 	vBdCBanMovExito 			NUMBER DEFAULT 0;
@@ -20,7 +18,7 @@ PROCEDURE procesar IS
 	
 	vFCC                  VARCHAR2(10);
 	vEjercicioFCC         NUMBER(4);
-  vPeriodoFCC           NUMBER(2);
+	vPeriodoFCC           NUMBER(2);
 	vConsecutivo					banmovimientos.consecutivo%TYPE;
 	vConceptoCargo        detCjTiposPago.consobretasatj%TYPE;
 	vMontoComiSobretasa		NUMBER DEFAULT 0;
